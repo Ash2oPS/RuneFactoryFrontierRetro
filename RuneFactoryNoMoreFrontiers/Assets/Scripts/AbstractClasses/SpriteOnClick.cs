@@ -9,15 +9,32 @@ public abstract class SpriteOnClick : OnClick
     [SerializeField]
     private SpriteRenderer _spriteRendererToManipulate;
 
+    [SerializeField]
+    private DisplayInfoText _displayInfoTextPrefab;
+
+    private float _r, _g, _b, _a;
+
     #endregion PrivateVaribables
 
     #region GettersAndSetters
 
     protected SpriteRenderer SpriteRendererToManipulate { get => _spriteRendererToManipulate; set => _spriteRendererToManipulate = value; }
+    protected float R { get => _r; set => _r = value; }
+    protected float G { get => _g; set => _g = value; }
+    protected float B { get => _b; set => _b = value; }
+    protected float A { get => _a; set => _a = value; }
 
     #endregion GettersAndSetters
 
     #region InheritedFunctions
+
+    private void Start()
+    {
+        R = SpriteRendererToManipulate.color.r;
+        G = SpriteRendererToManipulate.color.g;
+        B = SpriteRendererToManipulate.color.b;
+        A = SpriteRendererToManipulate.color.a;
+    }
 
     protected override void OnMouseEnter()
     {
@@ -43,12 +60,20 @@ public abstract class SpriteOnClick : OnClick
     }
     protected void ChangeSpriteColor(float newR, float newG, float newB, float newA)
     {
-        float r = SpriteRendererToManipulate.color.r + newR;
-        float g = SpriteRendererToManipulate.color.g + newG;
-        float b = SpriteRendererToManipulate.color.b + newB;
-        float a = SpriteRendererToManipulate.color.a + newA;
+        R += newR;
+        G += newG;
+        B += newB;
+        A += newA;
 
-        SpriteRendererToManipulate.color = new Vector4(r, g, b, a);
+        SpriteRendererToManipulate.color = new Vector4(R, G, B, A);
+    }
+
+    protected void DisplayInformation(string textToDisplay, Color textColor)
+    {
+        DisplayInfoText dit = Instantiate(_displayInfoTextPrefab, transform);
+
+        dit.GetComponent<TextMesh>().text = textToDisplay;
+        dit.GetComponent<TextMesh>().color = textColor;
     }
 
     #endregion Functions

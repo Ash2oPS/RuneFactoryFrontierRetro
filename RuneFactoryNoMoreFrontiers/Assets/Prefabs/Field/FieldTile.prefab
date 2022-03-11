@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRendererToManipulate: {fileID: 7965493156330376641}
-  _displayInfoText: {fileID: 1233804147, guid: 9b7269a3781ff9e45a403ec70d4f10d1, type: 3}
+  _displayInfoTextPrefab: {fileID: 1233804147, guid: 9b7269a3781ff9e45a403ec70d4f10d1, type: 3}
 --- !u!1 &7965493156330376646
 GameObject:
   m_ObjectHideFlags: 0

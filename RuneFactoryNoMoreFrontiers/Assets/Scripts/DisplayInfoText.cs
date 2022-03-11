@@ -24,20 +24,30 @@ public class DisplayInfoText : MonoBehaviour
 
     #region InheritedFunctions
 
-    private void Update()
+    private void Start()
     {
-        float r = TextMeshToAnimate.color.r;
-        float g = TextMeshToAnimate.color.g;
-        float b = TextMeshToAnimate.color.b;
-
-        float a = AlphaToAnimate;
-
-        TextMeshToAnimate.color = new Vector4(r, g, b, a);
+        StartCoroutine(ColorChanger());
     }
 
     #endregion InheritedFunctions
 
     #region Functions
+
+    private IEnumerator ColorChanger()
+    {
+        while (true)
+        {
+            float r = TextMeshToAnimate.color.r;
+            float g = TextMeshToAnimate.color.g;
+            float b = TextMeshToAnimate.color.b;
+
+            float a = AlphaToAnimate;
+
+            TextMeshToAnimate.color = new Vector4(r, g, b, a);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 
     private void DetroySelf()
     {

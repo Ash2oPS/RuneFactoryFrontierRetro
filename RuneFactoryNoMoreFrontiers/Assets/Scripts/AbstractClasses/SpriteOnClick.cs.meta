@@ -3,7 +3,9 @@ guid: 25a24547f58c561408d0a2ba6c54ead3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _spriteRendererToManipulate: {instanceID: 0}
+  - _displayInfoTextPrefab: {fileID: 1233804147, guid: 9b7269a3781ff9e45a403ec70d4f10d1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

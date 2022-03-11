@@ -6,6 +6,7 @@ public class Bed : SpriteOnClick
 {
     #region PrivateVariables
 
+    private TimeManager _tm;
     //private VariableType _myVariable;
 
     #endregion PrivateVaribables
@@ -18,16 +19,33 @@ public class Bed : SpriteOnClick
 
     #region InheritedFunctions
 
+    private void Awake()
+    {
+        _tm = FindObjectOfType<TimeManager>();
+    }
+
     protected override void Interact()
     {
-        
+        Sleep();
     }
 
     #endregion InheritedFunctions
 
     #region Functions
 
-    // YOUR NEW FUNCTIONS
+    private void Sleep()
+    {
+        if(_tm.Hour < 3)
+        {
+            _tm.NextDay(8);
+        }
+        else
+        {
+            _tm.NextDay(6);
+        }
+
+        DisplayInformation("Slept", Color.cyan);
+    }
 
     #endregion Functions
 }

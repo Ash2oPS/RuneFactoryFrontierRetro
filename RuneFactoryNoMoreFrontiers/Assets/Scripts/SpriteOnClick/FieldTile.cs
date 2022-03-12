@@ -11,7 +11,7 @@ public class FieldTile : SpriteOnClick
     private bool _isWatered, _isHoed, _isHarvested, _isReadyToBeGathered, isDried;
     private int _daysToBeGathered, _daysSinceHarvested, _daySinceNotWatered;
 
-    #endregion PrivateVaribables
+    #endregion PrivateVariables
 
     #region GettersAndSetters
 
@@ -46,7 +46,7 @@ public class FieldTile : SpriteOnClick
         else if (!IsWatered && IsHarvested)
         {
             WaterTile();
-        } 
+        }
         else if (!IsHarvested && IsHoed)
         {
             HarvestTile();
@@ -73,6 +73,7 @@ public class FieldTile : SpriteOnClick
             ChangeSpriteColor(0.6f, 0.6f, 0.6f, 0);
         }
     }
+
     private void SetToHarvested(bool value)
     {
         IsHarvested = value;
@@ -85,6 +86,7 @@ public class FieldTile : SpriteOnClick
             ChangeSpriteColor(0, -0.2f, 0, 0);
         }
     }
+
     private void SetToReadyToBeGathered(bool value)
     {
         IsReadyToBeGathered = value;
@@ -98,6 +100,7 @@ public class FieldTile : SpriteOnClick
             ChangeSpriteColor(-0.2f, -0.2f, -0.2f, 0);
         }
     }
+
     private void SetToWatered(bool value)
     {
         IsWatered = value;
@@ -110,6 +113,7 @@ public class FieldTile : SpriteOnClick
             ChangeSpriteColor(0, 0, -0.2f, 0);
         }
     }
+
     private void SetToHoed(bool value)
     {
         IsHoed = value;
@@ -123,7 +127,6 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-
     private void CutTile()
     {
         SetToDried(false);
@@ -131,44 +134,52 @@ public class FieldTile : SpriteOnClick
 
         DisplayInformation("Cut", Color.red);
     }
-    private void GatherTile() {
+
+    private void GatherTile()
+    {
         SetToReadyToBeGathered(false);
         SetToHarvested(false);
 
         DisplayInformation("Harvested successfully.\nIsReadyToBeGathered =" + IsReadyToBeGathered + "\nIsHarvested = " + IsHarvested, Color.green);
 
         _pm.AddGold(100);
-
     }
-    private void WaterTile() {
+
+    private void WaterTile()
+    {
         SetToWatered(true);
 
         DaySinceNotWatered = 0;
 
         DisplayInformation("Watered", Color.blue);
     }
-    private void HarvestTile() {
-        if(_pm.Seed > 0)
+
+    private void HarvestTile()
+    {
+        if (_pm.Seed > 0)
         {
             _pm.AddSeed(-1);
 
             SetToHarvested(true);
 
             DisplayInformation("Harvested", Color.yellow);
-        } else
+        }
+        else
         {
             DisplayInformation("No more seeds :(", Color.red);
         }
     }
-    private void HoeTile() {
+
+    private void HoeTile()
+    {
         SetToHoed(true);
 
         DisplayInformation("Hoed", Color.gray);
     }
+
     private void DryTile()
     {
         SetToDried(true);
-        SetToHarvested(false);
         if (IsReadyToBeGathered)
         {
             SetToReadyToBeGathered(false);
@@ -179,29 +190,32 @@ public class FieldTile : SpriteOnClick
 
     public void NextDayTile()
     {
-        if (IsWatered)
+        if (!IsDried)
         {
-            SetToWatered(false);
-            if (DaysSinceHarvested < DaysToBeGathered)
+            if (IsWatered)
             {
-                DaysSinceHarvested++;
+                SetToWatered(false);
+                if (DaysSinceHarvested < DaysToBeGathered)
+                {
+                    DaysSinceHarvested++;
+                }
+                else
+                {
+                    SetToReadyToBeGathered(true);
+                }
             }
-            else
+            else if (IsHarvested)
             {
-                SetToReadyToBeGathered(true);
-            }
-        }
-        else if (IsHarvested)
-        {
-            if(DaySinceNotWatered < 1)
-            {
-                DaySinceNotWatered++;
-            }
-            else
-            {
-                DaySinceNotWatered = 0;
-                DaysSinceHarvested = 0;
-                DryTile();
+                if (DaySinceNotWatered < 1)
+                {
+                    DaySinceNotWatered++;
+                }
+                else
+                {
+                    DaySinceNotWatered = 0;
+                    DaysSinceHarvested = 0;
+                    DryTile();
+                }
             }
         }
     }

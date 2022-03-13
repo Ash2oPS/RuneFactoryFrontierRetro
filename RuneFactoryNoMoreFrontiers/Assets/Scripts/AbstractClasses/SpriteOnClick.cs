@@ -14,7 +14,7 @@ public abstract class SpriteOnClick : OnClick
 
     private float _r, _g, _b, _a;
 
-    #endregion PrivateVaribables
+    #endregion PrivateVariables
 
     #region GettersAndSetters
 
@@ -52,12 +52,14 @@ public abstract class SpriteOnClick : OnClick
 
     protected void MouseIsOnTheTile()
     {
-        ChangeSpriteColor(0.2f, 0, 0, 0);
+        ChangeSpriteColor(0.2f, 0.2f, 0.2f, 0);
     }
+
     protected void MouseIsNotOnTheTile()
     {
-        ChangeSpriteColor(-0.2f, 0, 0, 0);
+        ChangeSpriteColor(-0.2f, -0.2f, -0.2f, 0);
     }
+
     protected void ChangeSpriteColor(float newR, float newG, float newB, float newA)
     {
         R += newR;

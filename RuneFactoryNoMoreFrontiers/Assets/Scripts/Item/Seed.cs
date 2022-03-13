@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new_SeedItem", menuName = "Item/Seed", order = 1)]
 public class Seed : Item
 {
-    public int daysToHarvest, timeToHarvestAgain;
+    [Header("Seed Part")]
+    public int daysToHarvest;
+
+    public int timeToHarvestAgain;
     public List<season> seasons;
     public Harvest correspondingHarvest;
     public seedType seedType;

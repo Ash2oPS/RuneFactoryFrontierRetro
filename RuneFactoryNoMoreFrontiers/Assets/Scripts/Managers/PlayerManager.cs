@@ -13,22 +13,20 @@ public class PlayerManager : MonoBehaviour
     [Header("UI")]
     [SerializeField]
     private TextMeshProUGUI tmpGold;
-    [SerializeField]
-    private TextMeshProUGUI tmpSeed;
 
     [SerializeField]
     [Header("Inventory")]
     private int _gold;
 
     [SerializeField]
-    private int _seed;
+    private List<InventoryItem> _inventory;
 
-    #endregion PrivateVaribables
+    #endregion PrivateVariables
 
     #region GettersAndSetters
 
-	public int Gold { get => _gold; }
-    public int Seed { get => _seed; }
+    public int Gold { get => _gold; }
+    private List<InventoryItem> Inventory { get => _inventory; }
 
     #endregion GettersAndSetters
 
@@ -47,18 +45,11 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        
     }
 
     #endregion InheritedFunctions
 
     #region Functions
-
-    public void AddSeed(int value)
-    {
-        _seed += value;
-        UiUpdate();
-    }
 
     public void AddGold(int value)
     {
@@ -80,8 +71,7 @@ public class PlayerManager : MonoBehaviour
 
     private void UiUpdate()
     {
-        tmpGold.text = "GOLD : " + Gold.ToString("0000000");
-        tmpSeed.text = "SEED : " + Seed.ToString("0000000");
+        tmpGold.text = "GOLD : " + Gold.ToString();
     }
 
     #endregion Functions

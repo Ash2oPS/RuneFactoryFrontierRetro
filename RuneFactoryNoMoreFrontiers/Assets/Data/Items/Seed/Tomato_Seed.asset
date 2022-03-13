@@ -17,6 +17,7 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   itemBuyingPrice: 550
   itemSellingPrice: 25
+  isStackable: 1
   daysToHarvest: 6
   timeToHarvestAgain: 3
   seasons: 01000000

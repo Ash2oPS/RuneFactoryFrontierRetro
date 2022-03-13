@@ -5,5 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new_EatableItem", menuName = "Item/Eatable", order = 2)]
 public class Eatable : Item
 {
-    public int restoredHP, restoredRP;
+    [Header("Eatable Part")]
+    public int restoredHP;
+
+    public int restoredRP;
 }

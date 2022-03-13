@@ -17,6 +17,7 @@ MonoBehaviour:
   itemSprite: {fileID: 0}
   itemBuyingPrice: 800
   itemSellingPrice: 120
+  isStackable: 1
   restoredHP: 10
   restoredRP: 5
   correspondingSeed: {fileID: 11400000, guid: 34e6385315df5e34e8b8fe14baa588c5, type: 2}

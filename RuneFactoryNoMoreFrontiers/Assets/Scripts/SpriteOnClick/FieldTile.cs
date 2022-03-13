@@ -156,18 +156,9 @@ public class FieldTile : SpriteOnClick
 
     private void HarvestTile()
     {
-        if (_pm.Seed > 0)
-        {
-            _pm.AddSeed(-1);
+        SetToHarvested(true);
 
-            SetToHarvested(true);
-
-            DisplayInformation("Harvested", Color.yellow);
-        }
-        else
-        {
-            DisplayInformation("No more seeds :(", Color.red);
-        }
+        DisplayInformation("Harvested", Color.yellow);
     }
 
     private void HoeTile()

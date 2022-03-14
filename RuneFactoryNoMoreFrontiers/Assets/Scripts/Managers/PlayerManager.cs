@@ -18,15 +18,11 @@ public class PlayerManager : MonoBehaviour
     [Header("Inventory")]
     private int _gold;
 
-    [SerializeField]
-    private List<InventoryItem> _inventory;
-
     #endregion PrivateVariables
 
     #region GettersAndSetters
 
     public int Gold { get => _gold; }
-    private List<InventoryItem> Inventory { get => _inventory; }
 
     #endregion GettersAndSetters
 

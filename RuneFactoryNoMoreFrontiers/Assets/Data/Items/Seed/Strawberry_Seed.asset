@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Strawberry Seed Bag
   itemDescription: A bag of strawberry seeds. It can fill 9 field tiles.
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 69196dace567aef4190ce425886cbb29, type: 3}
   itemBuyingPrice: 300
   itemSellingPrice: 15
   isStackable: 1

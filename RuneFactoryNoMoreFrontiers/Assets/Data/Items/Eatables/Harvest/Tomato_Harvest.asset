@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Tomato
   itemDescription: A delicious harvested tomato.
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 2058b4d43a8ab214ab6c9f2a3b16d1b5, type: 3}
   itemBuyingPrice: 1100
   itemSellingPrice: 220
   isStackable: 1

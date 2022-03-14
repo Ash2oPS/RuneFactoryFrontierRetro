@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Turnip
   itemDescription: A delicious harvested turnip.
-  itemSprite: {fileID: 0}
+  itemSprite: {fileID: 21300000, guid: 74e76ea6c19b27547a30ef6a8faf7f9c, type: 3}
   itemBuyingPrice: 300
   itemSellingPrice: 80
   isStackable: 1

@@ -10,6 +10,10 @@ public class ImageContainer : MonoBehaviour
 
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
+    private InventoryItem _inventoryItem;
+
+    public InventoryItem InventoryItem { get => _inventoryItem; }
+
     //private Type _maVariable;
 
     #endregion PrivateVariables
@@ -18,6 +22,7 @@ public class ImageContainer : MonoBehaviour
 
     public void SetUI(InventoryItem inevntoryItem)
     {
+        _inventoryItem = inevntoryItem;
         _image.sprite = inevntoryItem.item.itemSprite;
         if (inevntoryItem.item.isStackable)
         {

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0855ca9f4988344e9d93f2140e47a97, type: 3}
+  m_Name: Tulip_Seed
+  m_EditorClassIdentifier: 
+  itemName: Tulip Seed Bag
+  itemDescription: A bag of tulip seeds. It can fill 9 field tiles.
+  itemSprite: {fileID: 21300000, guid: bc32641f844ce3d42b22f9e034c2f527, type: 3}
+  itemBuyingPrice: 200
+  itemSellingPrice: 50
+  isStackable: 1
+  daysToHarvest: 6
+  timeToHarvestAgain: 0
+  seasons: 00000000
+  correspondingHarvest: {fileID: 11400000, guid: c0212d83b7696804b9e7e78b8025051b, type: 2}
+  seedType: 2

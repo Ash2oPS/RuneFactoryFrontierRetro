@@ -849,6 +849,10 @@ MonoBehaviour:
     nbItem: 1
   - item: {fileID: 11400000, guid: 53dfed1c7df0f304dab9698c653176ec, type: 2}
     nbItem: 10
+  - item: {fileID: 11400000, guid: 71bef227095fd2f46b2775446663d0c4, type: 2}
+    nbItem: 4
+  - item: {fileID: 11400000, guid: c0212d83b7696804b9e7e78b8025051b, type: 2}
+    nbItem: 3
   _inventoryContainer: {fileID: 1960672027}
   _imagesUIPrefab: {fileID: -1677106214030142802, guid: 913f6f2ab890af34d955d5fb64206df1, type: 3}
 --- !u!1 &1464319140

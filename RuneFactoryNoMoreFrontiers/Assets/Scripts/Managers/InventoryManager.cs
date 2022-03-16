@@ -38,73 +38,72 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        DisplayInventoryUI();
-    }
-
-    private void Update()
-    {
+        _allInventoryImages = new List<ImageContainer>();
     }
 
     #endregion InheritedFunctions
 
     #region Functions
 
-    public void DisplayInventoryUI()
+    public void DisplayInventoryUI(bool value)
     {
-        _allInventoryImages = new List<ImageContainer>();
-        if (_inventoryContainer.childCount < _inventory.Count)
+        if (value)
         {
-            for (int i = _inventoryContainer.childCount; i < _inventory.Count; i++)
-            {
-                var _image = Instantiate(_imagesUIPrefab, _inventoryContainer);
-                _allInventoryImages.Add(_image);
-            }
-        }
-        if (_inventoryContainer.childCount > _inventory.Count)
-        {
-            for (int i = _inventoryContainer.childCount; i >= _inventory.Count; i--)
-            {
-                Destroy(_allInventoryImages[0].gameObject);
-                _allInventoryImages.RemoveAt(0);
-            }
-        }
+            _inventoryContainer.gameObject.SetActive(true);
 
-        var j = 0;
-        foreach (var item in _inventory)
-        {
-            _allInventoryImages[j].SetUI(item);
-            j++;
-        }
+            if (_inventoryContainer.childCount < _inventory.Count)
+            {
+                for (int i = _inventoryContainer.childCount; i < _inventory.Count; i++)
+                {
+                    var _image = Instantiate(_imagesUIPrefab, _inventoryContainer);
+                    _allInventoryImages.Add(_image);
+                }
+            }
+            if (_inventoryContainer.childCount > _inventory.Count)
+            {
+                for (int i = _inventoryContainer.childCount; i >= _inventory.Count; i--)
+                {
+                    Destroy(_allInventoryImages[0].gameObject);
+                    _allInventoryImages.RemoveAt(0);
+                }
+            }
 
-        SwitchSelectedItem(0);
+            for (int j = 0; j < _inventory.Count; j++)
+            {
+                _allInventoryImages[j].SetUI(_inventory[j]);
+            }
+
+            SwitchSelectedItem(1);
+        }
+        else
+        {
+            for (int i = 0; i < _allInventoryImages.Count; i++)
+            {
+                Destroy(_allInventoryImages[i].gameObject);
+            }
+            _allInventoryImages.Clear();
+            _inventoryContainer.gameObject.SetActive(false);
+        }
     }
 
     public void SwitchSelectedItem(int index)
     {
-        _selectedItem = _inventory[index];
-        StartCoroutine(MoveSelectionCursor());
+        StartCoroutine(MoveSelectionCursor(index));
+        _selectedItem = _allInventoryImages[index].InventoItem;
     }
 
-    private IEnumerator MoveSelectionCursor()
+    private IEnumerator MoveSelectionCursor(int index)
     {
         float lerpT = 0;
         RectTransform rt = _selectionCursor.GetComponent<RectTransform>();
-        RectTransform rtNew = null;
-        for (int i = 0; i < _allInventoryImages.Count; i++)
-        {
-            if (_allInventoryImages[i].InventoryItem == SelectedItem)
-            {
-                rtNew = _allInventoryImages[i].GetComponent<RectTransform>();
-            }
-        }
+        RectTransform rtNew = _allInventoryImages[index].GetComponentInChildren<RectTransform>();
 
         Vector2 previousPos = new Vector2(rt.position.x, rt.position.y);
         Vector2 newPos = new Vector2(rtNew.position.x, rtNew.position.y);
-        rt.position = new Vector2();
         while (lerpT < 1)
         {
             rt.position = Vector2.Lerp(previousPos, newPos, lerpT);
-            lerpT += Time.deltaTime;
+            lerpT += Time.deltaTime * 5;
             yield return new WaitForEndOfFrame();
         }
     }

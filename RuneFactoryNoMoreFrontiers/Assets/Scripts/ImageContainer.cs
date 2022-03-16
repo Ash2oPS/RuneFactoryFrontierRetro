@@ -10,9 +10,9 @@ public class ImageContainer : MonoBehaviour
 
     [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _text;
-    private InventoryItem _inventoryItem;
+    private InventoryItem _inventoItem;
 
-    public InventoryItem InventoryItem { get => _inventoryItem; }
+    public InventoryItem InventoItem { get => _inventoItem; }
 
     //private Type _maVariable;
 
@@ -20,13 +20,13 @@ public class ImageContainer : MonoBehaviour
 
     #region Functions
 
-    public void SetUI(InventoryItem inevntoryItem)
+    public void SetUI(InventoryItem inventoryItem)
     {
-        _inventoryItem = inevntoryItem;
-        _image.sprite = inevntoryItem.item.itemSprite;
-        if (inevntoryItem.item.isStackable)
+        _inventoItem = inventoryItem;
+        _image.sprite = inventoryItem.item.itemSprite;
+        if (inventoryItem.item.isStackable)
         {
-            _text.text = inevntoryItem.nbItem.ToString("00");
+            _text.text = inventoryItem.nbItem.ToString("00");
         }
     }
 

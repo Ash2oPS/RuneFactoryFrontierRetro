@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
 
     private TimeManager _tm;
     private FieldsManager _fm;
+    private InventoryManager _im;
 
     [Header("UI")]
     [SerializeField]
@@ -18,11 +19,15 @@ public class PlayerManager : MonoBehaviour
     [Header("Inventory")]
     private int _gold;
 
+    private bool _isMenuOpened;
+
     #endregion PrivateVariables
 
     #region GettersAndSetters
 
     public int Gold { get => _gold; }
+
+    public bool IsMenuOpened { get => _isMenuOpened; }
 
     #endregion GettersAndSetters
 
@@ -32,15 +37,12 @@ public class PlayerManager : MonoBehaviour
     {
         _tm = GetComponent<TimeManager>();
         _fm = GetComponent<FieldsManager>();
+        _im = GetComponent<InventoryManager>();
     }
 
     private void Start()
     {
         UiUpdate();
-    }
-
-    private void Update()
-    {
     }
 
     #endregion InheritedFunctions
@@ -68,6 +70,20 @@ public class PlayerManager : MonoBehaviour
     private void UiUpdate()
     {
         tmpGold.text = "GOLD : " + Gold.ToString();
+    }
+
+    public void CallMenu()
+    {
+        if (!_isMenuOpened)
+        {
+            _im.DisplayInventoryUI(true);
+            _isMenuOpened = true;
+        }
+        else
+        {
+            _im.DisplayInventoryUI(false);
+            _isMenuOpened = false;
+        }
     }
 
     #endregion Functions

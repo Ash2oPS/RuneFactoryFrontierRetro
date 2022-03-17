@@ -43,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         UiUpdate();
+        SwitchToMenu(false);
     }
 
     #endregion InheritedFunctions
@@ -72,17 +73,29 @@ public class PlayerManager : MonoBehaviour
         tmpGold.text = "GOLD : " + Gold.ToString();
     }
 
-    public void CallMenu()
+    private void SwitchToMenu(bool value)
     {
-        if (!_isMenuOpened)
+        if (value)
         {
-            _im.DisplayInventoryUI(true);
+            _im.DisplayInventoryUI(false);
             _isMenuOpened = true;
         }
         else
         {
-            _im.DisplayInventoryUI(false);
+            _im.DisplayInventoryUI(true);
             _isMenuOpened = false;
+        }
+    }
+
+    public void CallMenu()
+    {
+        if (_isMenuOpened)
+        {
+            SwitchToMenu(false);
+        }
+        else
+        {
+            SwitchToMenu(true);
         }
     }
 

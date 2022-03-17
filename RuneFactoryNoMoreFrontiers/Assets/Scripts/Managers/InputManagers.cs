@@ -7,15 +7,15 @@ public class InputManagers : MonoBehaviour
 {
     #region PublicVariables
 
-    public KeyCode moveUpInput, moveDownInput, moveLeftInput, moveRightInput, menuInput;
+    public KeyCode moveUpInput, moveDownInput, moveLeftInput, moveRightInput, menuInput, switchItemUpInput, switchItemDownInput;
 
-    public UnityEvent moveUp, moveDown, moveLeft, moveRight, menu;
+    public UnityEvent moveUp, moveDown, moveLeft, moveRight, menu, switchItemUp, switchItemDown;
 
     #endregion PublicVariables
 
     private void Start()
     {
-        //StartCoroutine(InputListener());
+        StartCoroutine(InputListener());
     }
 
     private void Update()
@@ -23,6 +23,15 @@ public class InputManagers : MonoBehaviour
         if (Input.GetKeyDown(menuInput))
         {
             menu.Invoke();
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < -0.1)
+        {
+            switchItemUp.Invoke();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0.1)
+        {
+            switchItemDown.Invoke();
         }
     }
 

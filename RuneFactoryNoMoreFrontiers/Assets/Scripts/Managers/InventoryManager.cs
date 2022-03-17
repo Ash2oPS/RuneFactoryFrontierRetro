@@ -8,6 +8,8 @@ public class InventoryManager : MonoBehaviour
 {
     #region PrivateVariables
 
+    private PlayerManager _pm;
+
     [SerializeField]
     private List<InventoryItem> _inventory;
 
@@ -18,6 +20,8 @@ public class InventoryManager : MonoBehaviour
     private ImageContainer _imagesUIPrefab;
 
     private InventoryItem _selectedItem;
+
+    private int _selectedItemIndex;
 
     private List<ImageContainer> _allInventoryImages;
 
@@ -35,6 +39,11 @@ public class InventoryManager : MonoBehaviour
     #endregion GettersAndSetters
 
     #region InheritedFunctions
+
+    private void Awake()
+    {
+        _pm = GetComponent<PlayerManager>();
+    }
 
     private void Start()
     {
@@ -72,11 +81,12 @@ public class InventoryManager : MonoBehaviour
             {
                 _allInventoryImages[j].SetUI(_inventory[j]);
             }
-
-            SwitchSelectedItem(1);
+            _selectionCursor.gameObject.SetActive(true);
+            SwitchSelectedItem(_selectedItemIndex, false);
         }
         else
         {
+            _selectionCursor.gameObject.SetActive(false);
             for (int i = 0; i < _allInventoryImages.Count; i++)
             {
                 Destroy(_allInventoryImages[i].gameObject);
@@ -86,26 +96,71 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void SwitchSelectedItem(int index)
+    public void SwitchSelectedItem(int index, bool isAnimated)
     {
-        StartCoroutine(MoveSelectionCursor(index));
+        _selectedItemIndex = index;
+        StopCoroutine(MoveSelectionCursor(index, isAnimated));
+        StartCoroutine(MoveSelectionCursor(index, isAnimated));
         _selectedItem = _allInventoryImages[index].InventoItem;
     }
 
-    private IEnumerator MoveSelectionCursor(int index)
+    private IEnumerator MoveSelectionCursor(int index, bool isAnimated)
     {
         float lerpT = 0;
         RectTransform rt = _selectionCursor.GetComponent<RectTransform>();
-        RectTransform rtNew = _allInventoryImages[index].GetComponentInChildren<RectTransform>();
-
         Vector2 previousPos = new Vector2(rt.position.x, rt.position.y);
-        Vector2 newPos = new Vector2(rtNew.position.x, rtNew.position.y);
-        while (lerpT < 1)
+
+        if (isAnimated)
         {
-            rt.position = Vector2.Lerp(previousPos, newPos, lerpT);
-            lerpT += Time.deltaTime * 5;
-            yield return new WaitForEndOfFrame();
+            while (lerpT <= 1)
+            {
+                RectTransform rtNew = _allInventoryImages[index].GetComponentInChildren<RectTransform>();
+                Vector2 newPos = new Vector2(rtNew.position.x, rtNew.position.y);
+                lerpT += Time.deltaTime * 10;
+                rt.position = Vector2.Lerp(previousPos, newPos, lerpT);
+                yield return new WaitForEndOfFrame();
+            }
         }
+        else
+        {
+            SetToTransparent(_selectionCursor.GetComponent<Image>(), true);
+            yield return new WaitForEndOfFrame();
+            RectTransform rtNew = _allInventoryImages[index].GetComponentInChildren<RectTransform>();
+            Vector2 newPos = new Vector2(rtNew.position.x, rtNew.position.y);
+            rt.position = newPos;
+            SetToTransparent(_selectionCursor.GetComponent<Image>(), false);
+        }
+    }
+
+    public void SwitchSelectedItemAddedIndex(int addedIndex)
+    {
+        if (!_pm.IsMenuOpened)
+        {
+            _selectedItemIndex += addedIndex;
+            if (_selectedItemIndex > -1 && _selectedItemIndex < _inventory.Count)
+            {
+                SwitchSelectedItem(_selectedItemIndex, true);
+            }
+            else
+            {
+                _selectedItemIndex -= addedIndex;
+            }
+        }
+    }
+
+    private void SetToTransparent(Image image, bool value)
+    {
+        float r = image.color.r;
+        float g = image.color.g;
+        float b = image.color.b;
+        float a = 0;
+
+        if (!value)
+        {
+            a = 1;
+        }
+
+        image.color = new Vector4(r, g, b, a);
     }
 
     #endregion Functions

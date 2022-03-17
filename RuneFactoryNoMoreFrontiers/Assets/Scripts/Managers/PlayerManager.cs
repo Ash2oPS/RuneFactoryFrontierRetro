@@ -65,7 +65,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Faint()
     {
-        Debug.Log("Player fainted :/ (gros looser)");
+        Debug.Log("Player fainted :/ (gros loser)");
     }
 
     private void UiUpdate()

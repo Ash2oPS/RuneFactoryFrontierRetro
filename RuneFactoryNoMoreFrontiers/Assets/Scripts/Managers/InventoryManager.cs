@@ -116,7 +116,7 @@ public class InventoryManager : MonoBehaviour
             {
                 RectTransform rtNew = _allInventoryImages[index].GetComponentInChildren<RectTransform>();
                 Vector2 newPos = new Vector2(rtNew.position.x, rtNew.position.y);
-                lerpT += Time.deltaTime * 10;
+                lerpT += Time.deltaTime * 20;
                 rt.position = Vector2.Lerp(previousPos, newPos, lerpT);
                 yield return new WaitForEndOfFrame();
             }

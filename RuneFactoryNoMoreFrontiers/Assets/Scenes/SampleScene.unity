@@ -794,9 +794,9 @@ MonoBehaviour:
   tmpTime: {fileID: 653476503}
   _timeFactor: 1
   _year: 1
-  _season: 4
+  _season: 1
   _day: 28
-  _hour: 23
+  _hour: 15
   _minute: 30
 --- !u!4 &852829187
 Transform:

@@ -5,7 +5,6 @@ using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
-
     #region PrivateVariables
 
     private PlayerManager _pm;
@@ -14,11 +13,12 @@ public class TimeManager : MonoBehaviour
     [Header("UI")]
     [SerializeField]
     private TextMeshProUGUI tmpDate;
+
     [SerializeField]
     private TextMeshProUGUI tmpTime;
 
     [SerializeField]
-    [Header("DEBUG (Default : 1")]
+    [Header("DEBUG (Default : 1)")]
     private int _timeFactor;
 
     private bool _timeCanGo;
@@ -26,16 +26,17 @@ public class TimeManager : MonoBehaviour
     [Header("CurrentTime")]
     [SerializeField]
     private int _year;
+
     [SerializeField]
     private int _season, _day, _hour, _minute;
 
-    #endregion PrivateVaribables
+    #endregion PrivateVariables
 
     #region GettersAndSetters
 
     public bool TimeCanGo { get => _timeCanGo; set => _timeCanGo = value; }
 
-	public int Year { get => _year; set => _year = value; }
+    public int Year { get => _year; set => _year = value; }
     public int Season { get => _season; set => _season = value; }
     public int Day { get => _day; set => _day = value; }
     public int Hour { get => _hour; set => _hour = value; }
@@ -62,17 +63,17 @@ public class TimeManager : MonoBehaviour
 
     public void NextDay(int hourToWakeUp)
     {
-        if(Hour > 5)
-        { 
+        if (Hour > 5)
+        {
             Day++;
         }
 
-        if(Day == 1)
+        if (Day == 1)
         {
             SeasonChanger();
         }
 
-        if(_fm.AllFieldTiles.Count > 0)
+        if (_fm.AllFieldTiles.Count > 0)
         {
             for (int i = 0; i < _fm.AllFieldTiles.Count; i++)
             {
@@ -104,25 +105,24 @@ public class TimeManager : MonoBehaviour
         {
             ClockUpdate();
 
-            yield return new WaitForSeconds(1/_timeFactor);
+            yield return new WaitForSeconds(1 / _timeFactor);
 
             Minute++;
 
             CorrectTimeChecker();
 
             LateTimeFaintChecker();
-
         }
     }
 
     private void CorrectTimeChecker()
     {
-        if(Minute > 59)
+        if (Minute > 59)
         {
             Hour++;
             Minute = 0;
         }
-        if( Hour > 23)
+        if (Hour > 23)
         {
             Hour = 0;
             Day++;
@@ -140,14 +140,15 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void ClockUpdate() {
+    private void ClockUpdate()
+    {
         tmpDate.text = "Year : " + Year.ToString("00") + " - Season : " + Season.ToString() + " - Day : " + Day.ToString("00");
         tmpTime.text = Hour.ToString("00") + " : " + Minute.ToString("00");
     }
 
     private void LateTimeFaintChecker()
     {
-        if(Hour > 2 && Hour < 6)
+        if (Hour > 2 && Hour < 6)
         {
             _pm.LateTimeFaint();
         }

@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rusty Axe
   itemDescription: It's a rusty axe.
-  itemSprite: {fileID: -5651667117540000442, guid: 463012f9c514b2c4f9c1919aa7cdf8a5, type: 3}
+  itemSprite: {fileID: 21300000, guid: 99863f6998404ec43aa0189b27da9e20, type: 3}
   itemBuyingPrice: 0
   itemSellingPrice: 0
-  isStackable: 0
   isStackable: 0
   rpCost: 10
   skillPoints: 3

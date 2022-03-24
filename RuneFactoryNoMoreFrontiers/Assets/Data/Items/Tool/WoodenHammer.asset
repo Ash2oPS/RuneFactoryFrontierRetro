@@ -18,5 +18,13 @@ MonoBehaviour:
   itemBuyingPrice: 0
   itemSellingPrice: 0
   isStackable: 0
+  rpCost: 10
+  skillPoints: 3
+  mainAction:
+    m_PersistentCalls:
+      m_Calls: []
+  superAction:
+    m_PersistentCalls:
+      m_Calls: []
   logsThatCanBeDestroyed: []
   force: 10

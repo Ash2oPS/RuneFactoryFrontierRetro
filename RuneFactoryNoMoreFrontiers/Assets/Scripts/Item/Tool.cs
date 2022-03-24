@@ -5,10 +5,14 @@ using UnityEngine.Events;
 
 public abstract class Tool : Item
 {
-    [Header("Tool Part")]
-    private bool isStackable = false;
+    protected Tool()
+    {
+        isStackable = false;
+    }
 
-    protected int rpCost;
-    protected int skillPoints;
-    protected UnityEvent mainAction, superAction;
+    [Header("Tool Part")]
+    public int rpCost;
+
+    public int skillPoints;
+    public UnityEvent mainAction, superAction;
 }

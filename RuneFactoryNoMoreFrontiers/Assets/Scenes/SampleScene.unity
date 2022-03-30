@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 6}
-  m_SizeDelta: {x: 738, y: 80}
+  m_SizeDelta: {x: 484, y: 52}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &202981710
 MonoBehaviour:
@@ -873,8 +873,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73d1c701f61e7146a72ba6697b5138e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmpGold: {fileID: 312748004}
+  _playerName: 
+  _playerLevel:
+    levelName: 
+    levelNumber: 0
+    levelProgression: 0
+  _maxHp: 0
+  _hp: 0
+  _maxRp: 0
+  _rp: 0
+  _atk: 0
+  _mag: 0
+  _def: 0
+  _magDef: 0
+  _firePower: 0
+  _waterPower: 0
+  _earthPower: 0
+  _windPower: 0
+  _lightPower: 0
+  _darknessPower: 0
+  _skillLevels: []
   _gold: 100
+  _tmpGold: {fileID: 0}
 --- !u!114 &852829186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,7 +1230,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1110, y: 110}
+  m_SizeDelta: {x: 475, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1960672028
 MonoBehaviour:
@@ -1232,7 +1252,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 42, y: 42}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2

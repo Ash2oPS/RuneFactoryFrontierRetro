@@ -11,19 +11,40 @@ public class PlayerManager : MonoBehaviour
     private FieldsManager _fm;
     private InventoryManager _im;
 
-    [Header("UI")]
     [SerializeField]
-    private TextMeshProUGUI tmpGold;
+    [Header("Player Stats")]
+    private string _playerName;
+
+    [SerializeField]
+    private Level _playerLevel;
+
+    [SerializeField]
+    private int _maxHp, _hp, _maxRp, _rp, _atk, _mag, _def, _magDef, _firePower, _waterPower, _earthPower, _windPower, _lightPower, _darknessPower;
+
+    [SerializeField]
+    private List<Level> _skillLevels;
 
     [SerializeField]
     [Header("Inventory")]
     private int _gold;
+
+    [Header("UI")]
+    [SerializeField]
+    private TextMeshProUGUI _tmpGold;
 
     private bool _isMenuOpened;
 
     #endregion PrivateVariables
 
     #region GettersAndSetters
+
+    public string PlayerName { get => _playerName; }
+    public int MaxHp { get => _maxHp; }
+    public int Hp { get => _hp; }
+    public int MaxRp { get => _maxRp; }
+    public int Rp { get => _rp; }
+    public int Atk { get => _atk; }
+    public int Mag { get => _mag; }
 
     public int Gold { get => _gold; }
 
@@ -44,6 +65,7 @@ public class PlayerManager : MonoBehaviour
     {
         UiUpdate();
         SwitchToMenu(false);
+        Debug.LogWarning("Demander à Louis si y a pas moyen de faire rapidement tous les getters");
     }
 
     #endregion InheritedFunctions
@@ -70,7 +92,7 @@ public class PlayerManager : MonoBehaviour
 
     private void UiUpdate()
     {
-        tmpGold.text = "GOLD : " + Gold.ToString();
+        _tmpGold.text = "GOLD : " + Gold.ToString();
     }
 
     private void SwitchToMenu(bool value)

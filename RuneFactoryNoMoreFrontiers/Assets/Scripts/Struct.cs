@@ -15,4 +15,10 @@ public struct Level
     public string levelName;
     public int levelNumber;
     public float levelProgression;
+
+    public Level(string levelName, int levelNumber) : this()
+    {
+        this.levelName = levelName;
+        this.levelNumber = levelNumber;
+    }
 }

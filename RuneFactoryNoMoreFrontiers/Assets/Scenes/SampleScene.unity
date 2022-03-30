@@ -873,10 +873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73d1c701f61e7146a72ba6697b5138e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerName: 
+  _playerName: Raguna
   _playerLevel:
-    levelName: 
-    levelNumber: 0
+    levelName: Level
+    levelNumber: 1
     levelProgression: 0
   _maxHp: 0
   _hp: 0
@@ -893,7 +893,7 @@ MonoBehaviour:
   _lightPower: 0
   _darknessPower: 0
   _skillLevels: []
-  _gold: 100
+  _gold: 0
   _tmpGold: {fileID: 0}
 --- !u!114 &852829186
 MonoBehaviour:

@@ -13,10 +13,10 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     [Header("Player Stats")]
-    private string _playerName;
+    private string _playerName = "Raguna";
 
     [SerializeField]
-    private Level _playerLevel;
+    private Level _playerLevel = new Level("Level", 1);
 
     [SerializeField]
     private int _maxHp, _hp, _maxRp, _rp, _atk, _mag, _def, _magDef, _firePower, _waterPower, _earthPower, _windPower, _lightPower, _darknessPower;
@@ -45,6 +45,15 @@ public class PlayerManager : MonoBehaviour
     public int Rp { get => _rp; }
     public int Atk { get => _atk; }
     public int Mag { get => _mag; }
+    public int Def { get => _def; }
+    public int MagDef { get => _magDef; }
+    public int FirePower { get => _firePower; }
+    public int WaterPower { get => _waterPower; }
+    public int EarthPower { get => _earthPower; }
+    public int WindPower { get => _windPower; }
+    public int LightPower { get => _lightPower; }
+    public int DarknessPower { get => _darknessPower; }
+    public List<Level> SkillLevels { get => _skillLevels; }
 
     public int Gold { get => _gold; }
 

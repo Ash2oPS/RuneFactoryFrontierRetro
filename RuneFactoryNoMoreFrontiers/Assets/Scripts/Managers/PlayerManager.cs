@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private StatPreset _playerStatPreset;
 
+    [SerializeField]
     private Stats _playerTrueStats;
 
     [SerializeField]
@@ -41,8 +42,6 @@ public class PlayerManager : MonoBehaviour
     #region GettersAndSetters
 
     public string PlayerName { get => _playerName; }
-
-    public StatPreset PlayerStatPreset { get => _playerStatPreset; }
 
     public Stats PlayerTrueStats { get => _playerTrueStats; }
 
@@ -68,6 +67,7 @@ public class PlayerManager : MonoBehaviour
         UiUpdate();
         SwitchToMenu(false);
         Debug.LogWarning("Demander à Louis si y a pas moyen de faire rapidement tous les getters");
+        _playerTrueStats = _playerStatPreset.stats;
     }
 
     #endregion InheritedFunctions

@@ -28,12 +28,10 @@ public struct Level
 public struct Stats
 {
     [SerializeField]
-    private int _maxHp, _hp, _maxRp, _rp, _atk, _mag, _def, _magDef, _firePower, _fireRes, _waterPower, _waterRes, _earthPower, _earthRes, _windPower, _windRes, _lightPower, _lightRes, _darknessPower, _darknessRes;
+    private int _maxHp, _maxRp, _atk, _mag, _def, _magDef, _firePower, _fireRes, _waterPower, _waterRes, _earthPower, _earthRes, _windPower, _windRes, _lightPower, _lightRes, _darknessPower, _darknessRes;
 
     public int MaxHp { get => _maxHp; }
-    public int Hp { get => _hp; }
     public int MaxRp { get => _maxRp; }
-    public int Rp { get => _rp; }
     public int Atk { get => _atk; }
     public int Mag { get => _mag; }
     public int Def { get => _def; }
@@ -50,4 +48,60 @@ public struct Stats
     public int LightRes { get => _lightRes; }
     public int DarknessPower { get => _darknessPower; }
     public int DarknessRes { get => _darknessRes; }
+
+    public string ToStringStats()
+    {
+        return
+            "Max HP : " + MaxHp.ToString() + "\n" +
+            "Max RP : " + MaxRp.ToString() + "\n" +
+            "ATK : " + Atk.ToString() + "\n" +
+            "MAG : " + Mag.ToString() + "\n" +
+            "DEF : " + Def.ToString() + "\n" +
+            "MAGDEF : " + MagDef.ToString();
+    }
+
+    public string ToStringMagic(out int index)
+    {
+        return LineReturnText(out index, "Fire Power : " + FirePower.ToString(),
+            "Fire Resistance : " + FireRes.ToString(),
+            "Water Power : " + WaterPower.ToString(),
+            "Water Resistance : " + WaterRes.ToString(),
+            "Earth Power : " + EarthPower.ToString(),
+            "Earth Resistance : " + EarthRes.ToString(),
+            "Wind Power : " + WindPower.ToString(),
+            "Wind Resistance : " + WindRes.ToString(),
+            "Light Power : " + LightPower.ToString(),
+            "Light Resistance : " + LightRes.ToString(),
+            "Darkness Power : " + DarknessPower.ToString(),
+            "Darkness Resistance : " + DarknessRes.ToString());
+
+        //return
+        //"Fire Power : " + FirePower.ToString() + "\n" +
+        //"Fire Resistance : " + FireRes.ToString() + "\n" +
+        //"Water Power : " + WaterPower.ToString() + "\n" +
+        //"Water Resistance : " + WaterRes.ToString() + "\n" +
+        //"Earth Power : " + EarthPower.ToString() + "\n" +
+        //"Earth Resistance : " + EarthRes.ToString() + "\n" +
+        //"Wind Power : " + WindPower.ToString() + "\n" +
+        //"Wind Resistance : " + WindRes.ToString() + "\n" +
+        //"Light Power : " + LightPower.ToString() + "\n" +
+        //"Light Resistance : " + LightRes.ToString() + "\n" +
+        //"Darkness Power : " + DarknessPower.ToString() + "\n" +
+        //"Darkness Resistance : " + DarknessRes.ToString() + "\n";
+    }
+
+    private string LineReturnText(out int numberOfLines, params string[] lines)
+    {
+        var index = 0;
+        var ret = string.Empty;
+        foreach (var item in lines)
+        {
+            index++;
+            ret += item + "\n";
+        }
+        ret = ret.Remove(ret.Length - 1);
+
+        numberOfLines = index;
+        return ret;
+    }
 }

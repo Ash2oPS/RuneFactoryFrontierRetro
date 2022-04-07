@@ -877,10 +877,8 @@ MonoBehaviour:
   _playerStatPreset: {fileID: 11400000, guid: 156f2131f5112c045ab02ce0afd4b0a9, type: 2}
   _playerTrueStats:
     _maxHp: 0
-    _hp: 0
     _maxRp: 0
-    _rp: 0
-    _atk: 0
+    _atk: 12
     _mag: 0
     _def: 0
     _magDef: 0

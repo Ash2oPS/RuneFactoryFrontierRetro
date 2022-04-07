@@ -16,10 +16,12 @@ public class PlayerManager : MonoBehaviour
     private string _playerName = "Raguna";
 
     [SerializeField]
-    private Level _playerLevel = new Level("Level", 1);
+    private StatPreset _playerStatPreset;
+
+    private Stats _playerTrueStats;
 
     [SerializeField]
-    private int _maxHp, _hp, _maxRp, _rp, _atk, _mag, _def, _magDef, _firePower, _waterPower, _earthPower, _windPower, _lightPower, _darknessPower;
+    private Level _playerLevel = new Level("Level", 1);
 
     [SerializeField]
     private List<Level> _skillLevels;
@@ -39,20 +41,11 @@ public class PlayerManager : MonoBehaviour
     #region GettersAndSetters
 
     public string PlayerName { get => _playerName; }
-    public int MaxHp { get => _maxHp; }
-    public int Hp { get => _hp; }
-    public int MaxRp { get => _maxRp; }
-    public int Rp { get => _rp; }
-    public int Atk { get => _atk; }
-    public int Mag { get => _mag; }
-    public int Def { get => _def; }
-    public int MagDef { get => _magDef; }
-    public int FirePower { get => _firePower; }
-    public int WaterPower { get => _waterPower; }
-    public int EarthPower { get => _earthPower; }
-    public int WindPower { get => _windPower; }
-    public int LightPower { get => _lightPower; }
-    public int DarknessPower { get => _darknessPower; }
+
+    public StatPreset PlayerStatPreset { get => _playerStatPreset; }
+
+    public Stats PlayerTrueStats { get => _playerTrueStats; }
+
     public List<Level> SkillLevels { get => _skillLevels; }
 
     public int Gold { get => _gold; }

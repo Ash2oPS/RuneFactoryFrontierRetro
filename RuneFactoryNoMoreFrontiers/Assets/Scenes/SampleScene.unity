@@ -432,12 +432,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 32
+  m_AssetsPPU: 64
   m_RefResolutionX: 480
   m_RefResolutionY: 270
   m_UpscaleRT: 0
@@ -874,27 +874,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerName: Raguna
+  _playerStatPreset: {fileID: 0}
   _playerLevel:
     levelName: Level
     levelNumber: 1
     levelProgression: 0
-  _maxHp: 0
-  _hp: 0
-  _maxRp: 0
-  _rp: 0
-  _atk: 0
-  _mag: 0
-  _def: 0
-  _magDef: 0
-  _firePower: 0
-  _waterPower: 0
-  _earthPower: 0
-  _windPower: 0
-  _lightPower: 0
-  _darknessPower: 0
   _skillLevels: []
   _gold: 0
-  _tmpGold: {fileID: 0}
+  _tmpGold: {fileID: 312748004}
 --- !u!114 &852829186
 MonoBehaviour:
   m_ObjectHideFlags: 0

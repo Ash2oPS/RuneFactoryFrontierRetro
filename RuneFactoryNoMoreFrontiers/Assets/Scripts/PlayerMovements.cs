@@ -12,6 +12,8 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private float _walkSpeed;
 
+    private PlayerManager _pm;
+
     #endregion PrivateVariables
 
     #region GettersAndSetters
@@ -24,6 +26,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void Start()
     {
+        _pm = FindObjectOfType<PlayerManager>();
     }
 
     private void Update()
@@ -37,8 +40,26 @@ public class PlayerMovements : MonoBehaviour
 
     private void Move()
     {
-        float dirX = Input.GetAxis("Horizontal");
-        float dirY = Input.GetAxis("Vertical");
+        float dirX = 0f;
+        float dirY = 0f;
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            dirX = 1;
+        }
+        else if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            dirX = -1;
+        }
+
+        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
+        {
+            dirY = 1;
+        }
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            dirY = -1;
+        }
 
         Vector2 dir = new Vector2(dirX, dirY);
 

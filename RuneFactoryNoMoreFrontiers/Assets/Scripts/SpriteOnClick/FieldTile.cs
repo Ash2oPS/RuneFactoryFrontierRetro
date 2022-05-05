@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FieldTileState
+{
+    empty, hoed, harvested, readyToBeGathered, dried
+}
+
 public class FieldTile : SpriteOnClick
 {
     #region PrivateVariables
 
     private PlayerManager _pm;
 
-    private bool _isWatered, _isHoed, _isHarvested, _isReadyToBeGathered, isDried;
+    private bool _isWatered;
+    private FieldTileState _state;
     private int _daysToBeGathered, _daysSinceHarvested, _daySinceNotWatered;
 
     #endregion PrivateVariables
@@ -16,10 +22,7 @@ public class FieldTile : SpriteOnClick
     #region GettersAndSetters
 
     public bool IsWatered { get => _isWatered; set => _isWatered = value; }
-    public bool IsHoed { get => _isHoed; set => _isHoed = value; }
-    public bool IsHarvested { get => _isHarvested; set => _isHarvested = value; }
-    public bool IsReadyToBeGathered { get => _isReadyToBeGathered; set => _isReadyToBeGathered = value; }
-    public bool IsDried { get => isDried; set => isDried = value; }
+    public FieldTileState State { get => _state; }
     public int DaysToBeGathered { get => _daysToBeGathered; set => _daysToBeGathered = value; }
     public int DaysSinceHarvested { get => _daysSinceHarvested; set => _daysSinceHarvested = value; }
     public int DaySinceNotWatered { get => _daySinceNotWatered; set => _daySinceNotWatered = value; }
@@ -35,25 +38,30 @@ public class FieldTile : SpriteOnClick
 
     protected override void Interact()
     {
-        if (isDried)
+        switch (_state)
         {
-            CutTile();
-        }
-        else if (IsReadyToBeGathered)
-        {
-            GatherTile();
-        }
-        else if (!IsWatered && IsHarvested)
-        {
-            WaterTile();
-        }
-        else if (!IsHarvested && IsHoed)
-        {
-            HarvestTile();
-        }
-        else if (!IsHoed)
-        {
-            HoeTile();
+            case FieldTileState.dried:
+                CutTile();
+                break;
+
+            case FieldTileState.readyToBeGathered:
+                GatherTile();
+                break;
+
+            case FieldTileState.harvested:
+                if (!_isWatered)
+                {
+                    WaterTile();
+                }
+                break;
+
+            case FieldTileState.hoed:
+                HarvestTile();
+                break;
+
+            case FieldTileState.empty:
+                HoeTile();
+                break;
         }
     }
 
@@ -63,10 +71,10 @@ public class FieldTile : SpriteOnClick
 
     private void SetToDried(bool value)
     {
-        IsDried = value;
         if (value)
         {
             ChangeSpriteColor(-0.6f, -0.6f, -0.6f, 0);
+            _state = FieldTileState.dried;
         }
         else
         {
@@ -76,10 +84,10 @@ public class FieldTile : SpriteOnClick
 
     private void SetToHarvested(bool value)
     {
-        IsHarvested = value;
         if (value)
         {
             ChangeSpriteColor(0, 0.2f, 0, 0);
+            _state = FieldTileState.harvested;
         }
         else
         {
@@ -89,11 +97,11 @@ public class FieldTile : SpriteOnClick
 
     private void SetToReadyToBeGathered(bool value)
     {
-        IsReadyToBeGathered = value;
         if (value)
         {
             ChangeSpriteColor(0.2f, 0.2f, 0.2f, 0);
             DisplayInformation("Ready to be gathered !", Color.cyan);
+            _state = FieldTileState.readyToBeGathered;
         }
         else
         {
@@ -116,10 +124,10 @@ public class FieldTile : SpriteOnClick
 
     private void SetToHoed(bool value)
     {
-        IsHoed = value;
         if (value)
         {
             ChangeSpriteColor(0.2f, 0, 0, 0);
+            _state = FieldTileState.hoed;
         }
         else
         {
@@ -132,6 +140,8 @@ public class FieldTile : SpriteOnClick
         SetToDried(false);
         SetToHarvested(false);
 
+        _state = FieldTileState.hoed;
+
         DisplayInformation("Cut", Color.red);
     }
 
@@ -140,7 +150,9 @@ public class FieldTile : SpriteOnClick
         SetToReadyToBeGathered(false);
         SetToHarvested(false);
 
-        DisplayInformation("Harvested successfully.\nIsReadyToBeGathered =" + IsReadyToBeGathered + "\nIsHarvested = " + IsHarvested, Color.green);
+        _state = FieldTileState.hoed;
+
+        DisplayInformation("Harvested successfully", Color.green);
 
         _pm.AddGold(100);
     }
@@ -171,7 +183,7 @@ public class FieldTile : SpriteOnClick
     private void DryTile()
     {
         SetToDried(true);
-        if (IsReadyToBeGathered)
+        if (_state == FieldTileState.readyToBeGathered)
         {
             SetToReadyToBeGathered(false);
         }
@@ -181,7 +193,7 @@ public class FieldTile : SpriteOnClick
 
     public void NextDayTile()
     {
-        if (!IsDried)
+        if (_state != FieldTileState.dried)
         {
             if (IsWatered)
             {
@@ -195,7 +207,7 @@ public class FieldTile : SpriteOnClick
                     SetToReadyToBeGathered(true);
                 }
             }
-            else if (IsHarvested)
+            else if (_state == FieldTileState.harvested)
             {
                 if (DaySinceNotWatered < 1)
                 {

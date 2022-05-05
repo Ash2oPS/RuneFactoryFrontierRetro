@@ -35,6 +35,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _tmpGold;
 
+    private bool _canMove = true;
+
     private bool _isMenuOpened;
 
     #endregion PrivateVariables
@@ -51,6 +53,8 @@ public class PlayerManager : MonoBehaviour
 
     public bool IsMenuOpened { get => _isMenuOpened; }
 
+    public bool CanMove { get => _canMove; }
+
     #endregion GettersAndSetters
 
     #region InheritedFunctions
@@ -66,7 +70,6 @@ public class PlayerManager : MonoBehaviour
     {
         UiUpdate();
         SwitchToMenu(false);
-        Debug.LogWarning("Demander à Louis si y a pas moyen de faire rapidement tous les getters");
         _playerTrueStats = _playerStatPreset.stats;
     }
 
@@ -121,6 +124,11 @@ public class PlayerManager : MonoBehaviour
         {
             SwitchToMenu(true);
         }
+    }
+
+    public void SetCanMove(bool value)
+    {
+        _canMove = value;
     }
 
     #endregion Functions

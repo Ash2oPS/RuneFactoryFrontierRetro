@@ -9,4 +9,6 @@ public class Eatable : Item
     public int restoredHP;
 
     public int restoredRP;
+
+    public
 }

@@ -12,4 +12,8 @@ public class Item : ScriptableObject
     public Sprite itemSprite;
     public float itemBuyingPrice, itemSellingPrice;
     public bool isStackable = true;
+
+    public void UseItem()
+    {
+    }
 }

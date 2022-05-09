@@ -38,12 +38,18 @@ public abstract class SpriteOnClick : OnClick
 
     protected override void OnMouseEnter()
     {
-        MouseIsOnTheTile();
+        if (canBeSelected)
+        {
+            MouseIsOnTheTile();
+        }
     }
 
     protected override void OnMouseExit()
     {
-        MouseIsNotOnTheTile();
+        if (canBeSelected)
+        {
+            MouseIsNotOnTheTile();
+        }
     }
 
     #endregion InheritedFunctions

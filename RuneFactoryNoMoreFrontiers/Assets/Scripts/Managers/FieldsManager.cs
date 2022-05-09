@@ -11,11 +11,11 @@ public class FieldsManager : MonoBehaviour
 
     private List<FieldTile> _allFieldTiles;
 
-    #endregion PrivateVaribables
+    #endregion PrivateVariables
 
     #region GettersAndSetters
 
-	public List<FieldTile> AllFieldTiles { get => _allFieldTiles; set => _allFieldTiles = value; }
+    public List<FieldTile> AllFieldTiles { get => _allFieldTiles; set => _allFieldTiles = value; }
 
     #endregion GettersAndSetters
 
@@ -31,8 +31,6 @@ public class FieldsManager : MonoBehaviour
     {
         AllFieldTiles = new List<FieldTile>();
 
-        Debug.LogWarning("Demander à Louis comment faire pour que la liste de tous les FieldTile soit créée avant le Start et pareil pour que chaque FieldTile possède PlayerManager");
-
         FieldTile[] allFieldTilesArray = FindObjectsOfType<FieldTile>();
         if (allFieldTilesArray.Length > 0)
         {
@@ -40,13 +38,11 @@ public class FieldsManager : MonoBehaviour
             {
                 AllFieldTiles.Add(allFieldTilesArray[i]);
             }
-
         }
     }
 
     private void Update()
     {
-        
     }
 
     #endregion InheritedFunctions

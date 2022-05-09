@@ -9,7 +9,7 @@ public class Bed : SpriteOnClick
     private TimeManager _tm;
     //private VariableType _myVariable;
 
-    #endregion PrivateVaribables
+    #endregion PrivateVariables
 
     #region GettersAndSetters
 
@@ -35,7 +35,7 @@ public class Bed : SpriteOnClick
 
     private void Sleep()
     {
-        if(_tm.Hour < 3)
+        if (_tm.Hour < 3)
         {
             _tm.NextDay(8);
         }

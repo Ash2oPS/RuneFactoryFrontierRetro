@@ -7,7 +7,7 @@ public class InputManagers : MonoBehaviour
 {
     #region PublicVariables
 
-    public KeyCode moveUpInput, moveDownInput, moveLeftInput, moveRightInput, menuInput, switchItemUpInput, switchItemDownInput;
+    public KeyCode moveUpInput, moveDownInput, moveLeftInput, moveRightInput, interactionInput, menuInput, switchItemDownInput;
 
     public UnityEvent moveUp, moveDown, moveLeft, moveRight, menu, switchItemUp, switchItemDown;
 

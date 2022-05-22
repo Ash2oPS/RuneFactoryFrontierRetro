@@ -69,7 +69,7 @@ public class FieldTile : SpriteOnClick
 
     #region Functions
 
-    private void SetToDried(bool value)
+    public void SetToDried(bool value)
     {
         if (value)
         {
@@ -82,7 +82,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    private void SetToHarvested(bool value)
+    public void SetToHarvested(bool value)
     {
         if (value)
         {
@@ -95,7 +95,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    private void SetToReadyToBeGathered(bool value)
+    public void SetToReadyToBeGathered(bool value)
     {
         if (value)
         {
@@ -109,7 +109,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    private void SetToWatered(bool value)
+    public void SetToWatered(bool value)
     {
         IsWatered = value;
         if (value)
@@ -122,7 +122,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    private void SetToHoed(bool value)
+    public void SetToHoed(bool value)
     {
         if (value)
         {
@@ -135,7 +135,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    private void CutTile()
+    public void CutTile()
     {
         SetToDried(false);
         SetToHarvested(false);
@@ -145,7 +145,7 @@ public class FieldTile : SpriteOnClick
         DisplayInformation("Cut", Color.red);
     }
 
-    private void GatherTile()
+    public void GatherTile()
     {
         SetToReadyToBeGathered(false);
         SetToHarvested(false);
@@ -157,7 +157,7 @@ public class FieldTile : SpriteOnClick
         _pm.AddGold(100);
     }
 
-    private void WaterTile()
+    public void WaterTile()
     {
         SetToWatered(true);
 
@@ -166,21 +166,21 @@ public class FieldTile : SpriteOnClick
         DisplayInformation("Watered", Color.blue);
     }
 
-    private void HarvestTile()
+    public void HarvestTile()
     {
         SetToHarvested(true);
 
         DisplayInformation("Harvested", Color.yellow);
     }
 
-    private void HoeTile()
+    public void HoeTile()
     {
         SetToHoed(true);
 
         DisplayInformation("Hoed", Color.gray);
     }
 
-    private void DryTile()
+    public void DryTile()
     {
         SetToDried(true);
         if (_state == FieldTileState.readyToBeGathered)

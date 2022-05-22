@@ -14,5 +14,4 @@ public abstract class Tool : Item
     public int rpCost;
 
     public int skillPoints;
-    public UnityEvent mainAction, superAction;
 }

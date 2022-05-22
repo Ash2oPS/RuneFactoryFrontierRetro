@@ -13,7 +13,7 @@ public class Item : ScriptableObject
     public float itemBuyingPrice, itemSellingPrice;
     public bool isStackable = true;
 
-    public void UseItem()
+    public virtual void SetDelegate(UseItem delegateScript)
     {
     }
 }

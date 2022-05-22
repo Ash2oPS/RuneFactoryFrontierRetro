@@ -10,5 +10,5 @@ public class Eatable : Item
 
     public int restoredRP;
 
-    public
+
 }

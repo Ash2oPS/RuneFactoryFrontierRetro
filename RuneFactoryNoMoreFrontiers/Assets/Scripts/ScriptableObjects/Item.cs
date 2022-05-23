@@ -16,4 +16,13 @@ public class Item : ScriptableObject
     public virtual void SetDelegate(UseItem delegateScript)
     {
     }
+
+    public virtual void DefaultFieldTileAction(FieldTile tile)
+    {
+    }
+
+    public virtual void RegisterItem(UseItem useItem)
+    {
+        useItem.fieldTileAction = DefaultFieldTileAction;
+    }
 }

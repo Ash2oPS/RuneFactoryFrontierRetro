@@ -14,6 +14,8 @@ public class UseItem : MonoBehaviour
 
     public UseTool _usingItemDelegate;
 
+    public UnityAction<FieldTile> fieldTileAction;
+
     #endregion PrivateVariables
 
     #region GettersAndSetters
@@ -49,7 +51,7 @@ public class UseItem : MonoBehaviour
 
     public void Use()
     {
-        _currentItem.UseItem();
+        fieldTileAction.Invoke()
     }
 
     #endregion Functions

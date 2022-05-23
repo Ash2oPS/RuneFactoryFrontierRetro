@@ -43,11 +43,16 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         _pm = GetComponent<PlayerManager>();
+        UseItem.instance.useAction = ElPolloLoco;
     }
 
     private void Start()
     {
         _allInventoryImages = new List<ImageContainer>();
+    }
+
+    public void ElPolloLoco()
+    {
     }
 
     #endregion InheritedFunctions

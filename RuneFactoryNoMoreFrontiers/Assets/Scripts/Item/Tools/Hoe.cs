@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "new_Hoe", menuName = "Item/Tool/Hoe", order = 0)]
 public class Hoe : Tool
@@ -8,7 +9,7 @@ public class Hoe : Tool
     public override void SetDelegate(UseItem delegateScript)
     {
         FieldTile tile = null;
-        delegateScript._usingItemDelegate = HoeTile(FieldTile tile);
+        //delegateScript._usingItemDelegate = HoeTile(FieldTile tile);
     }
 
     public void HoeTile(FieldTile tile)

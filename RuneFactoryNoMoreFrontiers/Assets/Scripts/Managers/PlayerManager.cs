@@ -39,6 +39,8 @@ public class PlayerManager : MonoBehaviour
 
     private bool _isMenuOpened;
 
+    public FieldTile SelectedFieldTile;
+
     #endregion PrivateVariables
 
     #region GettersAndSetters

@@ -8,6 +8,17 @@ public struct InventoryItem
 {
     public Item item;
     public int nbItem;
+
+    public InventoryItem(Item item, int nbItem)
+    {
+        this.item = item;
+        this.nbItem = nbItem;
+    }
+
+    public void setNbItem(int value)
+    {
+        nbItem = value;
+    }
 }
 
 [Serializable]

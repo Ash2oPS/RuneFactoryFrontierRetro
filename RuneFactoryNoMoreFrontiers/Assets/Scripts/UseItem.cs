@@ -7,6 +7,8 @@ public class UseItem : MonoBehaviour
 {
     #region PrivateVariables
 
+    private PlayerManager _playerManager;
+
     private InventoryManager _inventoryManager;
     private Item _currentItem;
 
@@ -26,6 +28,15 @@ public class UseItem : MonoBehaviour
 
     #region InheritedFunctions
 
+    private void Start()
+    {
+        _playerManager = FindObjectOfType<PlayerManager>();
+        _inventoryManager = FindObjectOfType<InventoryManager>();
+
+        _currentItem = _inventoryManager.SelectedItem.item;
+        SetCurrentItem(_currentItem);
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
@@ -41,7 +52,7 @@ public class UseItem : MonoBehaviour
     public void SetCurrentItem(Item value)
     {
         _currentItem = value;
-        if (_currentItem.GetType() != typeof(Tool))
+        if (!(_currentItem is Tool) && !(_currentItem is Seed))
         {
             return;
         }
@@ -51,7 +62,8 @@ public class UseItem : MonoBehaviour
 
     public void Use()
     {
-        fieldTileAction.Invoke()
+        if (_playerManager.SelectedFieldTile != null && fieldTileAction != null)
+            fieldTileAction.Invoke(_playerManager.SelectedFieldTile);
     }
 
     #endregion Functions

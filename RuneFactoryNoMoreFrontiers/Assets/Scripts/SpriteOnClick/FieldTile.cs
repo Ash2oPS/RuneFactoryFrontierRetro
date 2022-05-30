@@ -11,11 +11,11 @@ public class FieldTile : SpriteOnClick
 {
     #region PrivateVariables
 
-    private PlayerManager _pm;
-
     private bool _isWatered;
     private FieldTileState _state;
     private int _daysToBeGathered, _daysSinceHarvested, _daySinceNotWatered;
+    private Seed _harvestedSeed;
+    private InventoryManager _im;
 
     #endregion PrivateVariables
 
@@ -26,42 +26,23 @@ public class FieldTile : SpriteOnClick
     public int DaysToBeGathered { get => _daysToBeGathered; set => _daysToBeGathered = value; }
     public int DaysSinceHarvested { get => _daysSinceHarvested; set => _daysSinceHarvested = value; }
     public int DaySinceNotWatered { get => _daySinceNotWatered; set => _daySinceNotWatered = value; }
+    public Seed HarvestedSeed { get => _harvestedSeed; }
 
     #endregion GettersAndSetters
 
     #region InheritedFunctions
 
-    private void Awake()
+    protected override void Start()
     {
-        _pm = FindObjectOfType<PlayerManager>();
+        base.Start();
+        _im = FindObjectOfType<InventoryManager>();
     }
 
     protected override void Interact()
     {
-        switch (_state)
+        if (State == FieldTileState.readyToBeGathered)
         {
-            case FieldTileState.dried:
-                CutTile();
-                break;
-
-            case FieldTileState.readyToBeGathered:
-                GatherTile();
-                break;
-
-            case FieldTileState.harvested:
-                if (!_isWatered)
-                {
-                    WaterTile();
-                }
-                break;
-
-            case FieldTileState.hoed:
-                HarvestTile();
-                break;
-
-            case FieldTileState.empty:
-                HoeTile();
-                break;
+            EmptyTile();
         }
     }
 
@@ -69,7 +50,22 @@ public class FieldTile : SpriteOnClick
 
     #region Functions
 
-    public void SetToDried(bool value)
+    private void EmptyTile()
+    {
+        _state = FieldTileState.empty;
+        R = 0.8490566f;
+        G = 0.6567275f;
+        B = 0.4685831f;
+        A = 1;
+
+        _im.ModifyInventory(_harvestedSeed.correspondingHarvest, 1);
+
+        _harvestedSeed = null;
+        _daySinceNotWatered = 0;
+        _daysSinceHarvested = 0;
+    }
+
+    private void SetToDried(bool value)
     {
         if (value)
         {
@@ -82,12 +78,15 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    public void SetToHarvested(bool value)
+    private void SetToHarvested(bool value, Seed seedHarvested)
     {
         if (value)
         {
             ChangeSpriteColor(0, 0.2f, 0, 0);
             _state = FieldTileState.harvested;
+            _harvestedSeed = seedHarvested;
+            _im.ModifyInventory(seedHarvested, -1);
+            _daysToBeGathered = _harvestedSeed.daysToHarvest;
         }
         else
         {
@@ -95,7 +94,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    public void SetToReadyToBeGathered(bool value)
+    private void SetToReadyToBeGathered(bool value)
     {
         if (value)
         {
@@ -109,7 +108,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    public void SetToWatered(bool value)
+    private void SetToWatered(bool value)
     {
         IsWatered = value;
         if (value)
@@ -122,7 +121,7 @@ public class FieldTile : SpriteOnClick
         }
     }
 
-    public void SetToHoed(bool value)
+    private void SetToHoed(bool value)
     {
         if (value)
         {
@@ -138,7 +137,7 @@ public class FieldTile : SpriteOnClick
     public void CutTile()
     {
         SetToDried(false);
-        SetToHarvested(false);
+        SetToHarvested(false, null);
 
         _state = FieldTileState.hoed;
 
@@ -148,7 +147,7 @@ public class FieldTile : SpriteOnClick
     public void GatherTile()
     {
         SetToReadyToBeGathered(false);
-        SetToHarvested(false);
+        SetToHarvested(false, null);
 
         _state = FieldTileState.hoed;
 
@@ -166,9 +165,9 @@ public class FieldTile : SpriteOnClick
         DisplayInformation("Watered", Color.blue);
     }
 
-    public void HarvestTile()
+    public void HarvestTile(Seed seedHarvested)
     {
-        SetToHarvested(true);
+        SetToHarvested(true, seedHarvested);
 
         DisplayInformation("Harvested", Color.yellow);
     }

@@ -6,4 +6,17 @@ using UnityEngine;
 public class WateringCan : Tool
 {
     public int waterCount;
+
+    public override void SetDelegate(UseItem delegateScript)
+    {
+        delegateScript.fieldTileAction = this.WaterTile;
+    }
+
+    public void WaterTile(FieldTile tile)
+    {
+        if (tile == null || tile.IsWatered)
+            return;
+
+        tile.WaterTile();
+    }
 }

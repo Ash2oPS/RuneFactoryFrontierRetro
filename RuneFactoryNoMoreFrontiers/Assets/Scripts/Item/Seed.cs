@@ -12,4 +12,17 @@ public class Seed : Item
     public List<season> seasons;
     public Harvest correspondingHarvest;
     public seedType seedType;
+
+    public override void SetDelegate(UseItem delegateScript)
+    {
+        delegateScript.fieldTileAction = this.SeedTile;
+    }
+
+    public void SeedTile(FieldTile tile)
+    {
+        if (tile == null || tile.State != FieldTileState.hoed)
+            return;
+
+        tile.HarvestTile(this);
+    }
 }

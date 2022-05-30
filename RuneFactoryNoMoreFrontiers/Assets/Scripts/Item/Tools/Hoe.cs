@@ -8,13 +8,14 @@ public class Hoe : Tool
 {
     public override void SetDelegate(UseItem delegateScript)
     {
-        FieldTile tile = null;
-        //delegateScript._usingItemDelegate = HoeTile(FieldTile tile);
+        delegateScript.fieldTileAction = this.HoeTile;
     }
 
     public void HoeTile(FieldTile tile)
     {
-        // a besoin de get la selected tile
+        if (tile == null || tile.State != FieldTileState.empty)
+            return;
+
         tile.HoeTile();
     }
 }

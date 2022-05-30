@@ -28,6 +28,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]
     private UI_SelectionCursor _selectionCursor;
 
+    private UseItem _ui;
+
     #endregion PrivateVariables
 
     #region GettersAndSetters
@@ -43,17 +45,20 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         _pm = GetComponent<PlayerManager>();
-        UseItem.instance.useAction = ElPolloLoco;
+        //UseItem.instance.useAction = ElPolloLoco;
     }
 
     private void Start()
     {
         _allInventoryImages = new List<ImageContainer>();
+        _ui = FindObjectOfType<UseItem>();
+        DisplayInventoryUI(true);
+        SwitchSelectedItem(_selectedItemIndex, false);
     }
 
-    public void ElPolloLoco()
+    /*public void ElPolloLoco()
     {
-    }
+    }*/
 
     #endregion InheritedFunctions
 
@@ -99,6 +104,46 @@ public class InventoryManager : MonoBehaviour
             _allInventoryImages.Clear();
             _inventoryContainer.gameObject.SetActive(false);
         }
+    }
+
+    public void ModifyInventory(Item item, int numberToAdd)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            if (Inventory[i].item == item)
+            {
+                Inventory[i].setNbItem(Inventory[i].nbItem + numberToAdd);
+                if (Inventory[i].nbItem < 1)
+                {
+                    Inventory.RemoveAt(i);
+                }
+                UpdateInventoryUI();
+                return;
+            }
+        }
+        InventoryItem itemToAdd = new InventoryItem(item, numberToAdd);
+        Inventory.Add(itemToAdd);
+        UpdateInventoryUI();
+    }
+
+    private void UpdateInventoryUI()
+    {
+        string log = "Oupse j'arrive pas à update mon hud :D\nCela dit, tu as :\n";
+
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            log += "- ";
+            log += Inventory[i].nbItem.ToString() + " ";
+            log += Inventory[i].item.name;
+            log += "\n";
+        }
+
+        Debug.Log(log);
     }
 
     public void SwitchSelectedItem(int index, bool isAnimated)
@@ -150,6 +195,7 @@ public class InventoryManager : MonoBehaviour
             {
                 _selectedItemIndex -= addedIndex;
             }
+            _ui.SetCurrentItem(SelectedItem.item);
         }
     }
 

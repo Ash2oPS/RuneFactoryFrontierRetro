@@ -14,6 +14,8 @@ public abstract class SpriteOnClick : OnClick
 
     private float _r, _g, _b, _a;
 
+    private bool _mouseHasBeenOnTheTile;
+
     #endregion PrivateVariables
 
     #region GettersAndSetters
@@ -28,8 +30,10 @@ public abstract class SpriteOnClick : OnClick
 
     #region InheritedFunctions
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         R = SpriteRendererToManipulate.color.r;
         G = SpriteRendererToManipulate.color.g;
         B = SpriteRendererToManipulate.color.b;
@@ -41,14 +45,30 @@ public abstract class SpriteOnClick : OnClick
         if (canBeSelected)
         {
             MouseIsOnTheTile();
+            _mouseHasBeenOnTheTile = true;
+
+            if (this.GetType() == typeof(FieldTile))
+            {
+                _pm.SelectedFieldTile = this as FieldTile;
+            }
         }
     }
 
     protected override void OnMouseExit()
     {
-        if (canBeSelected)
+        if (canBeSelected && _mouseHasBeenOnTheTile)
         {
             MouseIsNotOnTheTile();
+            _mouseHasBeenOnTheTile = false;
+
+            if (this.GetType() == typeof(FieldTile))
+            {
+                FieldTile thisAsFT = this as FieldTile;
+                if (thisAsFT == _pm.SelectedFieldTile)
+                {
+                    _pm.SelectedFieldTile = null;
+                }
+            }
         }
     }
 
